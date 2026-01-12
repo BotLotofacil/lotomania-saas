@@ -39,3 +39,11 @@ class Bet(Base):
     index: Mapped[int] = mapped_column(Integer)  # 1..N
     numbers_csv: Mapped[str] = mapped_column(String(400))  # "00,01,..."
     audit_json: Mapped[str] = mapped_column(Text)  # JSON string
+
+class Draw(Base):
+    __tablename__ = "draws"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    lottery: Mapped[str] = mapped_column(String(50), index=True)  # "lotomania"
+    contest: Mapped[int] = mapped_column(Integer, index=True, unique=True)
+    date_br: Mapped[str] = mapped_column(String(20), default="")  # "09/01/2026"
+    numbers_csv: Mapped[str] = mapped_column(String(300))  # "02,03,..."
